@@ -24,6 +24,7 @@ static void welcome() {
 }
 
 void init_monitor(int argc, char *argv[]) {
+	cpu.gpr = (void *) &cpu.eax;
 	/* Perform some global initialization */
 
 	/* Open the log file. */
@@ -85,8 +86,6 @@ void restart() {
 	load_entry();
 
 	/* Set the initial instruction pointer. */
-	cpu.gpr = (void*) &cpu.eax;
-	printf("%d\n", (int) cpu.gpr);
 	cpu.eip = ENTRY_START;
 
 	/* Initialize DRAM. */
