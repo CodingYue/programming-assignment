@@ -66,6 +66,7 @@ static int cmd_info(char *args) {
 
 	if (strcmp(arg, "r") == 0) {
 		for (R = 0; R < 8; ++R) printf("%s 0x%08x\n", regsl[R], cpu.gpr[R]._32);
+		printf("eip 0x%08x\n", cpu.eip);
 		return 0;
 	}
 	if (strcmp(arg, "w") == 0) {
