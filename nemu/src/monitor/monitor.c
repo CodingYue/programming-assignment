@@ -85,6 +85,7 @@ void restart() {
 	load_entry();
 
 	/* Set the initial instruction pointer. */
+	cpu.gpr = (void*) &cpu.eax;
 	cpu.eip = ENTRY_START;
 
 	/* Initialize DRAM. */
