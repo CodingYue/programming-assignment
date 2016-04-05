@@ -48,7 +48,7 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
-	{ "si [N]", "Continue the execution of program with N steps", cmd_si}
+	{ "si", "Continue the execution of program with N steps", cmd_si}
 	/*
 	{ "info SUBCMD", "Print some infomation about registers or watchpoints", cmd_info},
 	{ "p EXPR", "Print some expressions", cmd_p}
