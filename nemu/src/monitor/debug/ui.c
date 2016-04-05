@@ -65,7 +65,7 @@ static int cmd_info(char *args) {
 	if (arg == NULL) return -2;
 
 	if (strcmp(arg, "r") == 0) {
-		for (R = 0; R < 8; ++R) printf("%d\n", cpu.gpr[R]._32);
+		for (R = 0; R < 8; ++R) printf("%s %d\n", regsl[R], cpu.gpr[R]._32);
 		return 0;
 	}
 	if (strcmp(arg, "w") == 0) {
