@@ -67,6 +67,7 @@ static int cmd_x(char *args) {
 
 	arg = strtok(NULL, " ");
 	if (arg == NULL) return -2;
+	printf("%s\n", arg);
 	int EXPR = atoi(arg);
 
 	printf("%x\n", EXPR);
