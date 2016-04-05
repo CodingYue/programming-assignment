@@ -64,13 +64,12 @@ static int cmd_si(char *args) {
 	char *arg = strtok(NULL, " ");
 
 	int steps = 0;
-
 	if (arg == NULL) {
 		steps = 1;
 	} else {
 		steps = atoi(arg);
 	}
-	printf("%d\n", steps);
+	cpu_exec(steps);
 	return 0;
 }
 
