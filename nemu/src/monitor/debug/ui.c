@@ -68,7 +68,7 @@ static int cmd_info(char *args) {
 
 		return 0;
 	}
-	return 2;
+	return -2;
 }
 
 static int cmd_si(char *args) {
