@@ -24,8 +24,8 @@ static void welcome() {
 }
 
 void init_monitor(int argc, char *argv[]) {
-	cpu.gpr = (void *) &cpu.eax;
 	/* Perform some global initialization */
+	cpu.gpr = (void *) &cpu.eax;
 
 	/* Open the log file. */
 	init_log();
