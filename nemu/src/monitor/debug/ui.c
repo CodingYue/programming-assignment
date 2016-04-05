@@ -134,7 +134,7 @@ void ui_mainloop() {
 			if(strcmp(cmd, cmd_table[i].name) == 0) {
 				int result = cmd_table[i].handler(args);
 				if (result == -1) { return; }
-				if (result == -2) { printf("Invalid arguments"); }
+				if (result == -2) { printf("Invalid arguments\n"); }
 				break;
 			}
 		}
