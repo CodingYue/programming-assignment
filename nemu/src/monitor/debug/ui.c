@@ -37,6 +37,7 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 static int cmd_si(char *args);
 static int cmd_info(char *args);
+static int cmd_x(char *args);
 
 static struct {
 	char *name;
@@ -46,8 +47,9 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
-	{ "si", "Continue the execution of program with [N] steps", cmd_si},
-	{ "info", "Print some infomation about registers or watchpoints [r / w]", cmd_info}
+	{ "si", "si [N] - Continue the execution of program with N steps", cmd_si},
+	{ "info", "info [r/w] - Print some infomation about registers or watchpoints", cmd_info},
+	{ "x", "x N EXPR - Print 4N bytes from EXPR", cmd_x} 
 	/*,
 	{ "p EXPR", "Print some expressions", cmd_p}
 
@@ -57,6 +59,23 @@ static struct {
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
+
+static int cmd_x(char *args) {
+	char *arg = strtok(NULL, " ");
+	if (arg == NULL) return -2;
+	int N = atoi(arg);
+
+	arg = strtok(NULL, " ");
+	if (arg == NULL) return -2;
+	int EXPR = atoi(arg);
+
+	int i;
+	for (i = 0; i < N; ++i) {
+		printf("0x%08x\n", swaddr_read(EXPR + 4*i, 4));
+	}
+
+	return 0;
+}
 
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
@@ -70,7 +89,6 @@ static int cmd_info(char *args) {
 		return 0;
 	}
 	if (strcmp(arg, "w") == 0) {
-
 		return 0;
 	}
 	return -2;
