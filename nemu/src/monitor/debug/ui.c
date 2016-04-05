@@ -69,6 +69,8 @@ static int cmd_x(char *args) {
 	if (arg == NULL) return -2;
 	int EXPR = atoi(arg);
 
+	printf("%x\n", EXPR);
+
 	int i;
 	for (i = 0; i < N; ++i) {
 		printf("0x%08x\n", swaddr_read(EXPR + 4*i, 4));
