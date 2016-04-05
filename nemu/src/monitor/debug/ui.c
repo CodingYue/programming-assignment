@@ -60,6 +60,8 @@ static struct {
 
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
+	if (arg == NULL) return -2;
+
 	if (strcmp(arg, "r") == 0) {
 
 		return 0;
