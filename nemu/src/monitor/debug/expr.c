@@ -163,7 +163,7 @@ int expr(char *e, bool *success) {
 				while (top > 0) {
 					struct expr now = stack[top-1];
 					if (now.oper == L_brackets) break;
-					if (cur.oper < now.oper) break;
+					if (cur.oper > now.oper) break;
 					suffix[nr_suffix++] = now;
 					--top;
 				}
