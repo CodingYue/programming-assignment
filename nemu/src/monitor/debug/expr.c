@@ -31,7 +31,7 @@ static struct rule {
 	{"\\*", MULTIPLE},
 	{"/", DIVISION},
 	{"0x[0-9]+", HEX},
-	{"-?[0-9]+", DECIMAL},
+	{"[0-9]+", DECIMAL},
 	{"\\$[a-z]+", REG},
 	{"\\(", L_brackets},
 	{"\\)", R_brackets}
@@ -186,14 +186,14 @@ int expr(char *e, bool *success) {
 			if (top == 0) return 0;
 			if (stack[top-1].type != 0) return 0;
 			if (top == 1 || (top >= 2 && stack[top-2].type == 1)) {
-				if (suffix[i].oper != MULTIPLE) {
-					Log("Invalid EXPR");
+				if (suffix[i].oper == MULTIPLE) {
+					stack[top-1].value = swaddr_read(stack[top-1].value, 4);
+				} else
+				if (suffix[i].oper == MINUS) {
+					stack[top-1].value *= -1;
+				} else {
 					return 0;
 				}
-				
-				int val = swaddr_read(stack[--top].value, 4);
-				stack[top].type = 0;
-				stack[top++].value = val;
 			}
 			if (top >= 2) {
 				int y = stack[--top].value;
