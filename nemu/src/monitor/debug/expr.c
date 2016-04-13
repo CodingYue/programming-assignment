@@ -5,10 +5,11 @@
  */
 #include <sys/types.h>
 #include <regex.h>
+#include <stdlib.h>
 
 enum {
 	NOTYPE = 256, EQUAL, PLUS, MINUS, MULTIPLE, DIVISION,
-	DECIMAL, HEX
+	DECIMAL, HEX, REG, L_brackets, R_brackets
 
 	/* TODO: Add more token types */
 
@@ -24,13 +25,16 @@ static struct rule {
 	 */
 
 	{" +",	NOTYPE},				// spaces
-	{"\\+", '+'},					// plus
+	{"\\+", PLUS},					// plus
 	{"==", EQUAL},						// equal
 	{"-", MINUS},
 	{"\\*", MULTIPLE},
 	{"/", DIVISION},
-	{"[0-9]+", DECIMAL},
-	{"0x[0-9]+", HEX}
+	{"-?[0-9]+", DECIMAL},
+	{"-?0x[0-9]+", HEX},
+	{"\\$[a-z]+", REG},
+	{"\\(", L_brackets},
+	{"\\)", R_brackets}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -62,6 +66,7 @@ typedef struct token {
 Token tokens[32];
 int nr_token;
 
+
 static bool make_token(char *e) {
 	int position = 0;
 	int i;
@@ -84,9 +89,9 @@ static bool make_token(char *e) {
 				 * types of tokens, some extra actions should be performed.
 				 */
 
-				switch(rules[i].token_type) {
-					default: panic("please implement me");
-				}
+				if (rules[i].token_type == NOTYPE) break;
+				tokens[nr_token].type = rules[i].token_type;
+				strncpy(tokens[nr_token++].str, substr_start, substr_len);
 
 				break;
 			}
@@ -101,13 +106,112 @@ static bool make_token(char *e) {
 	return true; 
 }
 
-int expr(char *e) {
+struct expr {
+	int type;
+	union {
+		int oper;
+		int value;
+	};
+};
+
+struct expr suffix[32];
+struct expr stack[32];
+
+int expr(char *e, bool *success) {
+	*success = false;
 	if(!make_token(e)) {
-		return -2;
+		return 0;
 	}
 
-	/* TODO: Insert codes to evaluate the expression. */
-	panic("please implement me");
-	return 0;
+	int top = 0;
+	int nr_suffix = 0;
+	int i;
+
+	for (i = 0; i < nr_token; ++i) {
+		
+		struct expr cur;
+
+		if (tokens[i].type == HEX) {
+			cur.type = 0;
+			cur.value = (int) strtol(tokens[i].str+2, NULL, 16);
+		} else
+		if (tokens[i].type == DECIMAL) {
+			cur.type = 0;
+			cur.value = (int) strtol(tokens[i].str, NULL, 0);
+		} else
+		if (tokens[i].type == REG) {
+			cur.type = 0;
+			cur.value = get_reg(tokens[i].str+2);
+		} else {
+			cur.type = 1;
+			cur.oper = tokens[i].type;
+		}
+
+		if (cur.type == 0) {
+			suffix[nr_suffix++] = cur;
+		} else {
+			if (cur.oper == L_brackets) {
+				stack[top++] = cur;
+			} else
+			if (cur.oper == R_brackets) {
+				bool find = false;
+				while (top > 0) {
+					struct expr now = stack[--top];
+					if (now.oper == L_brackets) {
+						find = true;
+						break;
+					}
+					suffix[nr_suffix++] = now;
+				}
+				if (!find) return 0;
+			} else {
+				while (top > 0) {
+					struct expr now = stack[top-1];
+					if (now.oper == L_brackets) break;
+					if (cur.oper < now.oper) break;
+					suffix[nr_suffix++] = now;
+					--top;
+				}
+				stack[top++] = cur;
+			}
+		}
+	}
+
+
+	top = 0;
+	for (i = 0; i < nr_suffix; ++i) {
+		if (suffix[i].type == 0) {
+			stack[top++] = suffix[i];
+		} else {
+			if (top == 0) return 0;
+			if (stack[top-1].type != 0) return 0;
+			if (top == 1 || (top >= 2 && stack[top-2].type == 1)) {
+				if (suffix[i].oper != MULTIPLE) {
+					Log("Invalid EXPR");
+					return 0;
+				}
+				
+				int val = swaddr_read(stack[--top].value, 4);
+				stack[top].type = 0;
+				stack[top++].value = val;
+			}
+			if (top >= 2) {
+				int y = stack[--top].value;
+				int x = stack[--top].value;
+				stack[top].type = 0;
+				switch (suffix[i].oper) {
+					case PLUS: stack[top++].value = x+y;
+					case MINUS: stack[top++].value = x-y;
+					case MULTIPLE: stack[top++].value = x*y;
+					case DIVISION: stack[top++].value = x/y;
+					default: return 0;
+				};
+			}
+		}
+	}
+	if (top != 1) return 0;
+	int result = stack[--top].value;
+	*success = true;
+	return result;
 }
 

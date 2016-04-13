@@ -49,4 +49,6 @@ extern const char* regsl[];
 extern const char* regsw[];
 extern const char* regsb[];
 
+int get_reg(const char *name);
+
 #endif

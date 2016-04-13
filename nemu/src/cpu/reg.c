@@ -8,6 +8,18 @@ const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
 const char *regsw[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
 const char *regsb[] = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
 
+int get_reg(const char *name) {
+	int R;
+	for (R = 0; R < 8; ++R) {
+		if (strcmp(name, regsl[R]) == 0) return reg_l(R);
+		if (strcmp(name, regsw[R]) == 0) return reg_w(R);
+		if (strcmp(name, regsb[R]) == 0) return reg_b(R);
+	}
+	Log("register name not matched");
+	return 0;
+}
+
+
 void reg_test() {
 	srand(time(0));
 	uint32_t sample[8];
