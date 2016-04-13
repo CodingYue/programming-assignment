@@ -29,7 +29,7 @@ static struct rule {
 	{"-", MINUS},
 	{"\\*", MULTIPLE},
 	{"/", DIVISION},
-	{"\\d+", DECIMAL},
+	{"[0-9]+", DECIMAL},
 	{"0x\\d+", HEX}
 };
 
