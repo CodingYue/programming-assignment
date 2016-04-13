@@ -176,6 +176,12 @@ int expr(char *e, bool *success) {
 		suffix[nr_suffix++] = stack[--top];
 	}
 	
+	Log("Suffix is :");
+	for (i = 0; i < nr_suffix; ++i) {
+		if (suffix[i].type == 0) printf("%d ", suffix[i].value);
+		else printf("%s ", rules[suffix[i].oper].regex);
+	}
+
 	for (i = 0; i < nr_suffix; ++i) {
 		if (suffix[i].type == 0) {
 			stack[top++] = suffix[i];
