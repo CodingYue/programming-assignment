@@ -177,8 +177,11 @@ int expr(char *e, bool *success) {
 		}
 	}
 
+	while (top > 0) {
+		suffix[nr_suffix++] = stack[--top];
+	}
 
-	top = 0;
+	
 	for (i = 0; i < nr_suffix; ++i) {
 		if (suffix[i].type == 0) {
 			stack[top++] = suffix[i];
