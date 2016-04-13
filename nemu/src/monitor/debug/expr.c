@@ -181,6 +181,7 @@ int expr(char *e, bool *success) {
 		if (suffix[i].type == 0) printf("%d ", suffix[i].value);
 		else printf("%s ", rules[suffix[i].oper].regex);
 	}
+	puts("");
 
 	for (i = 0; i < nr_suffix; ++i) {
 		if (suffix[i].type == 0) {
