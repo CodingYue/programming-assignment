@@ -25,7 +25,6 @@ static struct rule {
 	 */
 
 	{" +",	NOTYPE},				// spaces
-	{"==", EQUAL},						// equal
 	{"\\+", PLUS},					// plus
 	{"-", MINUS},
 	{"\\*", MULTIPLE},
@@ -34,7 +33,8 @@ static struct rule {
 	{"[0-9]+", DECIMAL},
 	{"\\$[a-z]+", REG},
 	{"\\(", L_brackets},
-	{"\\)", R_brackets}
+	{"\\)", R_brackets},
+	{"==", EQUAL}						// equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -202,6 +202,7 @@ int expr(char *e, bool *success) {
 					case MINUS: stack[top++].value = x-y; break;
 					case MULTIPLE: stack[top++].value = x*y; break;
 					case DIVISION: stack[top++].value = x/y; break;
+					case EQUAL: stack[top++].value = (x==y); break;
 					default: return 0;
 				};
 			}
