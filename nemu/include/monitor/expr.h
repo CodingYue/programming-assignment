@@ -3,5 +3,5 @@
 
 #include "common.h"
 
-int expr(char *e);
+int expr(char *e, bool *success);
 #endif

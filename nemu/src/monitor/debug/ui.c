@@ -81,9 +81,15 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_p(char *args) {
-	char *arg = strtok(NULL, " ");
-	if (arg == NULL) return -2;
-	return expr(args);
+	if (args == NULL) return -2;
+	bool success;
+	int result = expr(args, &success);
+	if (success == false) {
+		printf("Invalid EXPR %s\n", args);
+	} else {
+		printf("%d\n", result);
+	}
+	return 0;
 }
 
 static int cmd_info(char *args) {
