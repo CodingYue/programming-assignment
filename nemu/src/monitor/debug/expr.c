@@ -30,8 +30,8 @@ static struct rule {
 	{"-", MINUS},
 	{"\\*", MULTIPLE},
 	{"/", DIVISION},
-	{"-?[0-9]+", DECIMAL},
 	{"0x[0-9]+", HEX},
+	{"-?[0-9]+", DECIMAL},
 	{"\\$[a-z]+", REG},
 	{"\\(", L_brackets},
 	{"\\)", R_brackets}
