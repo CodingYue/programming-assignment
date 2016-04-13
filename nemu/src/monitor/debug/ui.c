@@ -38,6 +38,7 @@ static int cmd_help(char *args);
 static int cmd_si(char *args);
 static int cmd_info(char *args);
 static int cmd_x(char *args);
+static int cmd_p(char *args);
 
 static struct {
 	char *name;
@@ -49,7 +50,8 @@ static struct {
 	{ "q", "Exit NEMU", cmd_q },
 	{ "si", "si [N] - Continue the execution of program with N steps", cmd_si},
 	{ "info", "info [r/w] - Print some infomation about registers or watchpoints", cmd_info},
-	{ "x", "x N EXPR - Print 4N bytes from EXPR", cmd_x} 
+	{ "x", "x N EXPR - Print 4N bytes from EXPR", cmd_x},
+	{ "p", "p EXPR - Evaluate value of EXPR", cmd_p}
 	/*,
 	{ "p EXPR", "Print some expressions", cmd_p}
 
@@ -76,6 +78,12 @@ static int cmd_x(char *args) {
 	}
 
 	return 0;
+}
+
+static int cmd_p(char *args) {
+	char *arg = strtok(NULL, " ");
+	if (arg == NULL) return -2;
+	return expr(args);
 }
 
 static int cmd_info(char *args) {
