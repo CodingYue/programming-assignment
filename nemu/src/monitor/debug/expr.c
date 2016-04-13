@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 enum {
-	NOTYPE = 256, EQUAL, MULTIPLE, DIVISION, PLUS, MINUS,
+	NOTYPE, EQUAL, MULTIPLE, DIVISION, PLUS, MINUS,
 	DECIMAL, HEX, REG, L_brackets, R_brackets
 
 	/* TODO: Add more token types */
