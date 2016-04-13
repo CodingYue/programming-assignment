@@ -31,7 +31,7 @@ static struct rule {
 	{"\\*", MULTIPLE},
 	{"/", DIVISION},
 	{"0x[0-9]+", HEX},
-	{"[0-9]+", DECIMAL},
+	{"[0-9|A-F|a-f]+", DECIMAL},
 	{"\\$[a-z]+", REG},
 	{"\\(", L_brackets},
 	{"\\)", R_brackets}
