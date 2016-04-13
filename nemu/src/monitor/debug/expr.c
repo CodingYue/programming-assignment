@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 enum {
-	NOTYPE = 256, EQUAL, PLUS, MINUS, MULTIPLE, DIVISION,
+	NOTYPE = 256, EQUAL, MULTIPLE, DIVISION, PLUS, MINUS,
 	DECIMAL, HEX, REG, L_brackets, R_brackets
 
 	/* TODO: Add more token types */
@@ -25,8 +25,8 @@ static struct rule {
 	 */
 
 	{" +",	NOTYPE},				// spaces
-	{"\\+", PLUS},					// plus
 	{"==", EQUAL},						// equal
+	{"\\+", PLUS},					// plus
 	{"-", MINUS},
 	{"\\*", MULTIPLE},
 	{"/", DIVISION},
@@ -163,7 +163,7 @@ int expr(char *e, bool *success) {
 				while (top > 0) {
 					struct expr now = stack[top-1];
 					if (now.oper == L_brackets) break;
-					if (cur.oper > now.oper) break;
+					if (cur.oper < now.oper) break;
 					suffix[nr_suffix++] = now;
 					--top;
 				}
