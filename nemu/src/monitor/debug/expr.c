@@ -136,7 +136,7 @@ int expr(char *e, bool *success) {
 		} else
 		if (tokens[i].type == REG) {
 			cur.type = 0;
-			cur.value = get_reg(tokens[i].str+2);
+			cur.value = get_reg(tokens[i].str+1);
 		} else {
 			cur.type = 1;
 			cur.oper = tokens[i].type;
