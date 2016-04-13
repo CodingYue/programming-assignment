@@ -175,7 +175,6 @@ int expr(char *e, bool *success) {
 	while (top > 0) {
 		suffix[nr_suffix++] = stack[--top];
 	}
-
 	
 	for (i = 0; i < nr_suffix; ++i) {
 		if (suffix[i].type == 0) {
