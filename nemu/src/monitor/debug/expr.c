@@ -198,10 +198,10 @@ int expr(char *e, bool *success) {
 				int x = stack[--top].value;
 				stack[top].type = 0;
 				switch (suffix[i].oper) {
-					case PLUS: stack[top++].value = x+y;
-					case MINUS: stack[top++].value = x-y;
-					case MULTIPLE: stack[top++].value = x*y;
-					case DIVISION: stack[top++].value = x/y;
+					case PLUS: stack[top++].value = x+y; break;
+					case MINUS: stack[top++].value = x-y; break;
+					case MULTIPLE: stack[top++].value = x*y; break;
+					case DIVISION: stack[top++].value = x/y; break;
 					default: return 0;
 				};
 			}
