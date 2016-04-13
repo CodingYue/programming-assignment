@@ -133,7 +133,7 @@ int expr(char *e, bool *success) {
 
 		if (tokens[i].type == HEX) {
 			cur.type = 0;
-			cur.value = (int) strtol(tokens[i].str+2, NULL, 16);
+			cur.value = (int) strtol(tokens[i].str, NULL, 16);
 		} else
 		if (tokens[i].type == DECIMAL) {
 			cur.type = 0;
