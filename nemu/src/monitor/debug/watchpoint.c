@@ -6,7 +6,7 @@
 #define NR_WP 32
 
 static WP wp_list[NR_WP];
-static WP *head, *free_;
+static WP *free_;
 
 void init_wp_list() {
 	int i;
@@ -17,12 +17,11 @@ void init_wp_list() {
 	}
 	wp_list[NR_WP - 1].next = NULL;
 
-	head = NULL;
 	free_ = wp_list;
 }
 
 void new_wp(char *e, int value) {
-	Assert(free_ != NULL, "WP overflow!");
+	Assert(free_ != NULL, "watchpoint pool overflow!");
 	WP *wp = free_;
 	
 	int len = strlen(e);
@@ -31,8 +30,6 @@ void new_wp(char *e, int value) {
 
 	wp->value = value;
 	free_ = free_->next;
-	wp->next = head;
-	head = wp;
 }
 
 int free_wp(int NO) {
@@ -51,4 +48,19 @@ void show_watchpoints() {
 		if (wp_list[i].expr == NULL) continue;
 		printf("No.%d, expr is (%s), expr value is %d\n", i, wp_list[i].expr, wp_list[i].value);
 	}
+}
+
+int check_watchpoints() {
+	int cnt = 0;
+	int i;
+	for (i = 0; i < NR_WP; ++i) {
+		if (wp_list[i].expr == NULL) continue;
+		bool success;
+		int cur_value = expr(wp_list[i].expr, &success);
+		if (cur_value == wp_list[i].value) continue;
+		printf("No.%d, expr is (%s), expr previous value is %d, current value is %d\n", i, wp_list[i].expr, wp_list[i].value, cur_value);	
+		wp_list[i].value = cur_value;
+		++cnt;
+	}
+	return cnt;
 }
