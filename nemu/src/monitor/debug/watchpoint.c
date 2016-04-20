@@ -18,6 +18,18 @@ void init_wp_list() {
 	free_ = wp_list;
 }
 
-/* TODO: Implement the functionality of watchpoint */
 
+WP *new_wp(char *e, int value) {
+	Assert(free_ != NULL, "WP overflow!");
+	WP *ret = free_;
+	ret->expr = e;
+	ret->value = value;
+	free_ = free_->next;
+	return ret;
+}
 
+void free_wp(int NO) {
+	WP *wp = &wp_list[NO];
+	wp->next = free_;
+	free_ = wp;
+}
