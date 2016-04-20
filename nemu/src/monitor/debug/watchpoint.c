@@ -37,3 +37,11 @@ int free_wp(int NO) {
 	free_ = wp;
 	return 0;
 }
+
+void show_watchpoints() {
+	int i;
+	for (i = 0; i < NR_WP; ++i) {
+		if (wp_list[i].expr == NULL) continue;
+		printf("No.%d, expr is%s, expr value is %d\n", i, wp_list[i].expr, wp_list[i].value);
+	}
+}

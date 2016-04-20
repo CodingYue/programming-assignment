@@ -127,6 +127,7 @@ static int cmd_info(char *args) {
 		return 0;
 	}
 	if (strcmp(arg, "w") == 0) {
+		show_watchpoints();
 		return 0;
 	}
 	return -2;
