@@ -1,5 +1,8 @@
 #include "monitor/watchpoint.h"
 #include "monitor/expr.h"
+#include <string.h>
+
+
 
 #define NR_WP 32
 
@@ -22,7 +25,11 @@ void init_wp_list() {
 void new_wp(char *e, int value) {
 	Assert(free_ != NULL, "WP overflow!");
 	WP *wp = free_;
-	wp->expr = e;
+	
+	int len = strlen(e);
+	wp->expr = (char *) malloc((len+1) * sizeof(char));
+	strcpy(wp->expr, e);
+
 	wp->value = value;
 	free_ = free_->next;
 	wp->next = head;
@@ -42,6 +49,6 @@ void show_watchpoints() {
 	int i;
 	for (i = 0; i < NR_WP; ++i) {
 		if (wp_list[i].expr == NULL) continue;
-		printf("No.%d, expr is%s, expr value is %d\n", i, wp_list[i].expr, wp_list[i].value);
+		printf("No.%d, expr is %s, expr value is %d\n", i, wp_list[i].expr, wp_list[i].value);
 	}
 }
