@@ -15,6 +15,7 @@ int get_reg(const char *name) {
 		if (strcmp(name, regsw[R]) == 0) return reg_w(R);
 		if (strcmp(name, regsb[R]) == 0) return reg_b(R);
 	}
+	if (strcmp(name, "eip") == 0) return cpu.eip;
 	Log("register name not matched");
 	return 0;
 }
