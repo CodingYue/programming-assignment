@@ -11,6 +11,7 @@ void init_wp_list() {
 	for(i = 0; i < NR_WP; i ++) {
 		wp_list[i].NO = i;
 		wp_list[i].next = &wp_list[i + 1];
+		wp_list[i].expr = NULL;
 	}
 	wp_list[NR_WP - 1].next = NULL;
 
@@ -18,18 +19,21 @@ void init_wp_list() {
 	free_ = wp_list;
 }
 
-
-WP *new_wp(char *e, int value) {
+void new_wp(char *e, int value) {
 	Assert(free_ != NULL, "WP overflow!");
-	WP *ret = free_;
-	ret->expr = e;
-	ret->value = value;
+	WP *wp = free_;
+	wp->expr = e;
+	wp->value = value;
 	free_ = free_->next;
-	return ret;
+	wp->next = head;
+	head = wp;
 }
 
-void free_wp(int NO) {
+int free_wp(int NO) {
 	WP *wp = &wp_list[NO];
+	if (wp->expr == NULL) return -1;
+	wp->expr = NULL;
 	wp->next = free_;
 	free_ = wp;
+	return 0;
 }

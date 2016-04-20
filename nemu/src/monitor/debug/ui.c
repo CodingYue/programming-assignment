@@ -39,6 +39,8 @@ static int cmd_si(char *args);
 static int cmd_info(char *args);
 static int cmd_x(char *args);
 static int cmd_p(char *args);
+static int cmd_w(char *args);
+static int cmd_d(char *args);
 
 static struct {
 	char *name;
@@ -51,11 +53,10 @@ static struct {
 	{ "si", "si [N] - Continue the execution of program with N steps", cmd_si},
 	{ "info", "info [r/w] - Print some infomation about registers or watchpoints", cmd_info},
 	{ "x", "x N EXPR - Print 4N bytes from EXPR", cmd_x},
-	{ "p", "p EXPR - Evaluate value of EXPR", cmd_p}
-	/*,
-	{ "p EXPR", "Print some expressions", cmd_p}
+	{ "p", "p EXPR - Evaluate value of EXPR", cmd_p},
+	{ "w", "w EXPR - Program pause while EXPR changes", cmd_w},
+	{ "d", "d N - Delete No.N watchpoint", cmd_d}
 
-	*/
 	/* TODO: Add more commands */
 
 };
@@ -77,6 +78,28 @@ static int cmd_x(char *args) {
 		printf("0x%08x\n", swaddr_read(EXPR + 4*i, 4));
 	}
 
+	return 0;
+}
+
+static int cmd_d(char *args) {
+	if (args == NULL) return -2;
+	int NO = atoi(args);
+	int result = free_wp(NO);
+	if (result == -1) {
+		printf("Nth watchpoint dosen't exist");
+	}
+	return 0;
+}
+
+static int cmd_w(char *args) {	
+	if (args == NULL) return -2;
+	bool success = false;
+	int result = expr(args, &success);
+	if (!success) {
+		printf("Invalid EXPR %s\n", args);
+	} else {
+		new_wp(args, result);
+	}
 	return 0;
 }
 
