@@ -46,7 +46,7 @@ void show_watchpoints() {
 	int i;
 	for (i = 0; i < NR_WP; ++i) {
 		if (wp_list[i].expr == NULL) continue;
-		printf("No.%d, expr is (%s), expr value is %d\n", i, wp_list[i].expr, wp_list[i].value);
+		printf("No.%d, expr is (%s), expr value is 0x%x\n", i, wp_list[i].expr, wp_list[i].value);
 	}
 }
 
@@ -58,7 +58,7 @@ int check_watchpoints() {
 		bool success;
 		int cur_value = expr(wp_list[i].expr, &success);
 		if (cur_value == wp_list[i].value) continue;
-		printf("No.%d, expr is (%s), expr previous value is %d, current value is %d\n", i, wp_list[i].expr, wp_list[i].value, cur_value);	
+		printf("No.%d, expr is (%s), expr previous value is 0x%x, current value is 0x%x\n", i, wp_list[i].expr, wp_list[i].value, cur_value);	
 		wp_list[i].value = cur_value;
 		++cnt;
 	}
