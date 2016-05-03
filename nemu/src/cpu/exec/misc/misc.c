@@ -23,3 +23,19 @@ make_helper(lea) {
 	print_asm("leal %s,%%%s", op_src->str, regsl[m.reg]);
 	return 1 + len;
 }
+
+make_helper(call) {
+	uint32_t rel;
+	if (ops_decoded.is_data_size_16) {
+		rel = instr_fetch(eip + 1, 2);
+		cpu.eip += 3;
+	} else {
+		rel = instr_fetch(eip + 1, 4);
+		cpu.eip += 5;
+	}
+
+	cpu.esp = cpu.esp - 0x4;
+	swaddr_write(cpu.eip, 4, cpu.eip);
+	cpu.eip += rel;
+	return 0;
+}
