@@ -2,6 +2,8 @@
 
 #include "cpu/decode/modrm.h"
 
+#define DEBUG
+
 #define decode_r_internal concat3(decode_r_, SUFFIX, _internal)
 #define decode_rm_internal concat3(decode_rm_, SUFFIX, _internal)
 #define decode_i concat(decode_i_, SUFFIX)
