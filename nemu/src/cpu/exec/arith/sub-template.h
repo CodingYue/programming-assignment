@@ -3,10 +3,12 @@
 #define instr sub
 
 static void do_execute() {
-	DATA_TYPE result = op_dest->val - op_src->val;
-	OPERAND_W(op_dest, result);
+	uint32_t dest = op_dest->val;
+	uint32_t src = ~op_src->val;
+	uint64_t result = (uint64_t) src + dest + 1;
+	OPERAND_W(op_dest, (uint32_t) result);
 
-	panic("please implement me");
+	update_EFLAGS(result);
 	print_asm_template1();
 
 }
