@@ -4,7 +4,6 @@
 make_helper(nop);
 make_helper(int3);
 make_helper(lea);
-make_helper(call);
 make_helper(push_ebp);
 make_helper(pop_ebp);
 

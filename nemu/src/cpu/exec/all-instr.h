@@ -27,4 +27,6 @@
 
 #include "special/special.h"
 
+#include "jump/jump.h"
+
 #include "compare/test.h"
