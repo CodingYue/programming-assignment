@@ -35,7 +35,13 @@ make_helper(call) {
 	}
 
 	cpu.esp = cpu.esp - 0x4;
-	swaddr_write(cpu.eip, 4, cpu.eip);
+	swaddr_write(cpu.esp, 4, cpu.eip);
 	cpu.eip += rel;
 	return 0;
+}
+
+make_helper(push_ebp) {
+	cpu.esp = cpu.esp - 0x4;
+	swaddr_write(cpu.esp, 4, cpu.ebp);
+	return 1;
 }
