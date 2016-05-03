@@ -29,8 +29,8 @@ make_group(group1_v,
 
 /* 0x83 */
 make_group(group1_sx_v,
-	inv, inv, and_i2rm_b, inv, 
-	or_i2rm_b, inv, inv, xor_i2rm_b)
+	inv, inv, and_i2rm_v, inv, 
+	or_i2rm_v, inv, inv, xor_i2rm_v)
 
 /* 0xc0 */
 make_group(group2_i_b,
