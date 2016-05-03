@@ -26,5 +26,6 @@ extern Operands ops_decoded;
 #define op_src2 (&ops_decoded.src2)
 #define op_dest (&ops_decoded.dest)
 
+void update_EFLAGS(uint64_t);
 
 #endif
