@@ -24,14 +24,3 @@ make_helper(lea) {
 	return 1 + len;
 }
 
-make_helper(push_ebp) {
-	cpu.esp = cpu.esp - 0x4;
-	swaddr_write(cpu.esp, 4, cpu.ebp);
-	return 1;
-}
-
-make_helper(pop_ebp) {
-	cpu.ebp = swaddr_read(cpu.esp, 4);
-	cpu.esp += 0x4;
-	return 1;
-}

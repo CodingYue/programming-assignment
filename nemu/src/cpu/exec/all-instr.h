@@ -31,3 +31,6 @@
 
 #include "compare/test.h"
 #include "compare/cmp.h"
+
+#include "stack/push.h"
+#include "stack/pop.h"
