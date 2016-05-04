@@ -30,3 +30,4 @@
 #include "jump/jump.h"
 
 #include "compare/test.h"
+#include "compare/cmp.h"
