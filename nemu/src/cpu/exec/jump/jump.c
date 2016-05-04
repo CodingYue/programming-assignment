@@ -6,7 +6,7 @@ make_helper(call) {
 	rel = instr_fetch(eip + 1, len);
 	
 	cpu.esp = cpu.esp - 0x4;
-	swaddr_write(cpu.esp, 4, cpu.eip);
+	swaddr_write(cpu.esp, 4, cpu.eip+len+1);
 	cpu.eip += rel;
 	return len+1;
 }
