@@ -11,18 +11,6 @@ make_helper(call) {
 	return len+1;
 }
 
-make_helper(je) {
-	uint32_t rel8 = instr_fetch(eip + 1, 1);
-	if (cpu.EFLAGS & ZFLAG) cpu.eip += rel8;
-	return 2;
-}
-
-make_helper(jbe) {
-	uint32_t rel8 = instr_fetch(eip + 1, 1);
-	if (cpu.EFLAGS & (ZFLAG + CFLAG)) cpu.eip += rel8;
-	return 2;
-}
-
 make_helper(jmp_b) {
 	uint32_t rel8 = instr_fetch(eip + 1, 1);
 	cpu.eip += rel8;
@@ -35,4 +23,25 @@ make_helper(jmp_v) {
 	rel = instr_fetch(eip + 1, len);
 	cpu.eip += rel;
 	return len+1;
+}
+
+
+/* condition jmp */
+
+make_helper(je) {
+	uint32_t rel8 = instr_fetch(eip + 1, 1);
+	if (cpu.EFLAGS & ZFLAG) cpu.eip += rel8;
+	return 2;
+}
+
+make_helper(jbe) {
+	uint32_t rel8 = instr_fetch(eip + 1, 1);
+	if (cpu.EFLAGS & (ZFLAG + CFLAG)) cpu.eip += rel8;
+	return 2;
+}
+
+make_helper(jne) {
+	uint32_t rel8 = instr_fetch(eip + 1, 1);
+	if (!(cpu.EFLAGS & ZFLAG)) cpu.eip += rel8;
+	return 2;	
 }
