@@ -6,7 +6,7 @@ static void do_execute() {
 
 	uint64_t result = op_dest->val - op_src->val;
 	update_EFLAGS(result);
-	print_asm_template1();
+	print_asm_template2();
 
 }
 make_instr_helper(i2a)
