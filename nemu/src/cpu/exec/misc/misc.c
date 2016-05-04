@@ -40,5 +40,5 @@ make_helper(ret) {
 
 	print_asm("ret");
 
-	return 1;
+	return 0;
 }
