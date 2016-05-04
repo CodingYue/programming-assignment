@@ -11,5 +11,6 @@ make_helper(jne);
 make_helper(jle);
 make_helper(jg);
 make_helper(jge);
+make_helper(jl);
 
 #endif

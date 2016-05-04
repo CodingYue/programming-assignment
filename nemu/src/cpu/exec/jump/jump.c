@@ -86,3 +86,12 @@ make_helper(jg) {
 
 	return 2;
 }
+
+make_helper(jl) {
+	int8_t rel8 = instr_fetch(eip + 1, 1);
+	if (SFLAG != OFLAG) cpu.eip += rel8;
+
+	print_asm("jg 0x%x", cpu.eip+2);
+
+	return 2;
+}
