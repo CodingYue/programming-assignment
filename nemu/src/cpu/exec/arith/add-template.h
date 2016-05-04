@@ -4,8 +4,8 @@
 
 static void do_execute() {
 	uint32_t dest = op_dest->val;
-	uint32_t src = ~op_src->val;
-	uint64_t result = (uint64_t) src + dest + 1;
+	uint32_t src = op_src->val;
+	uint64_t result = (uint64_t) src + dest;
 	OPERAND_W(op_dest, (uint32_t) result);
 
 	update_EFLAGS(result);
