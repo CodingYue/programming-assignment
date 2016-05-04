@@ -3,8 +3,9 @@
 #define instr push
 
 static void do_execute() {
-	DATA_TYPE result = ~op_src->val;
-	OPERAND_W(op_src, result);
+	cpu.esp -= 4;
+	swaddr_write(cpu.esp, 4, op_src->val);
+
 	print_asm_template1();
 }
 
