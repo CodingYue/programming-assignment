@@ -9,7 +9,7 @@ static void do_execute() {
 	OPERAND_W(op_dest, (uint32_t) result);
 
 	update_EFLAGS(result);
-	print_asm_template1();
+	print_asm_template2();
 
 }
 
