@@ -1,5 +1,7 @@
 #include "cpu/exec/helper.h"
 
+
+
 make_helper(call) {
 	int32_t rel;
 	int len = ops_decoded.is_data_size_16 ? 2 : 4;
@@ -51,6 +53,7 @@ make_helper(jne) {
 
 make_helper(jle) {
 	int32_t rel8 = instr_fetch(eip + 1, 1);
+	printf("%d\n", rel8);
 	if (ZFLAG || SFLAG != OFLAG) cpu.eip += rel8;
 	return 2;
 }
