@@ -70,8 +70,8 @@ static int cmd_x(char *args) {
 
 	arg = strtok(NULL, " ");
 	if (arg == NULL) return -2;
-	int EXPR = (int) strtol(arg, NULL, 0);
-	printf("%x\n", EXPR);
+	bool success;
+	int EXPR = expr(args, &success);
 
 	int i;
 	for (i = 0; i < N; ++i) {
