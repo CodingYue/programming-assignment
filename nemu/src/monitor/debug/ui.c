@@ -71,7 +71,7 @@ static int cmd_x(char *args) {
 	arg = strtok(NULL, " ");
 	if (arg == NULL) return -2;
 	bool success;
-	int EXPR = expr(args, &success);
+	int EXPR = expr(arg, &success);
 
 	int i;
 	for (i = 0; i < N; ++i) {
