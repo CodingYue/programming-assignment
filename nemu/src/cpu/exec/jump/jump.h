@@ -9,5 +9,7 @@ make_helper(jc);
 make_helper(jbe);
 make_helper(jne);
 make_helper(jle);
+make_helper(jg);
+make_helper(jge);
 
 #endif

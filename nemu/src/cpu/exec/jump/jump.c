@@ -53,7 +53,12 @@ make_helper(jne) {
 
 make_helper(jle) {
 	int8_t rel8 = instr_fetch(eip + 1, 1);
-	printf("%d\n", rel8);
 	if (ZFLAG || SFLAG != OFLAG) cpu.eip += rel8;
+	return 2;
+}
+
+make_helper(jg) {
+	int8_t rel8 = instr_fetch(eip + 1, 1);
+	if (ZFLAG == 0 && SFLAG == OFLAG) cpu.eip += rel8;
 	return 2;
 }
