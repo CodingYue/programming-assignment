@@ -12,7 +12,7 @@ make_helper(call) {
 	swaddr_write(cpu.esp, 4, cpu.eip+len+1);
 	cpu.eip += rel;
 
-	print_asm("call 0x%x", rel);
+	print_asm("call 0x%x", cpu.eip);
 
 	return len+1;
 }
@@ -21,7 +21,7 @@ make_helper(jmp_b) {
 	int8_t rel8 = instr_fetch(eip + 1, 1);
 	cpu.eip += rel8;
 
-	print_asm("jmp 0x%x", rel8);
+	print_asm("jmp 0x%x", cpu.eip);
 
 	return 2;
 }
@@ -34,7 +34,7 @@ make_helper(jmp_v) {
 
 	cpu.eip += rel;
 
-	print_asm("jmp 0x%x", rel);
+	print_asm("jmp 0x%x", cpu.eip);
 
 	return len+1;
 }
@@ -46,7 +46,7 @@ make_helper(je) {
 	int8_t rel8 = instr_fetch(eip + 1, 1);
 	if (ZFLAG) cpu.eip += rel8;
 
-	print_asm("je 0x%x", rel8);
+	print_asm("je 0x%x", cpu.eip);
 
 	return 2;
 }
@@ -55,7 +55,7 @@ make_helper(jbe) {
 	int8_t rel8 = instr_fetch(eip + 1, 1);
 	if (ZFLAG || CFLAG) cpu.eip += rel8;
 
-	print_asm("jbe 0x%x", rel8);
+	print_asm("jbe 0x%x", cpu.eip);
 
 	return 2;
 }
@@ -64,7 +64,7 @@ make_helper(jne) {
 	int8_t rel8 = instr_fetch(eip + 1, 1);
 	if (!ZFLAG) cpu.eip += rel8;
 
-	print_asm("jne 0x%x", rel8);
+	print_asm("jne 0x%x", cpu.eip);
 
 	return 2;	
 }
@@ -73,7 +73,7 @@ make_helper(jle) {
 	int8_t rel8 = instr_fetch(eip + 1, 1);
 	if (ZFLAG || SFLAG != OFLAG) cpu.eip += rel8;
 
-	print_asm("jle 0x%x", rel8);
+	print_asm("jle 0x%x", cpu.eip);
 
 	return 2;
 }
@@ -82,7 +82,7 @@ make_helper(jg) {
 	int8_t rel8 = instr_fetch(eip + 1, 1);
 	if (ZFLAG == 0 && SFLAG == OFLAG) cpu.eip += rel8;
 
-	print_asm("jg 0x%x", rel8);
+	print_asm("jg 0x%x", cpu.eip);
 
 	return 2;
 }
