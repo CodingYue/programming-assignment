@@ -8,5 +8,6 @@ make_helper(jmp_b);
 make_helper(jc);
 make_helper(jbe);
 make_helper(jne);
+make_helper(jle);
 
 #endif

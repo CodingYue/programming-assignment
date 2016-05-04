@@ -30,18 +30,24 @@ make_helper(jmp_v) {
 
 make_helper(je) {
 	uint32_t rel8 = instr_fetch(eip + 1, 1);
-	if (cpu.EFLAGS & ZFLAG) cpu.eip += rel8;
+	if (ZFLAG) cpu.eip += rel8;
 	return 2;
 }
 
 make_helper(jbe) {
 	uint32_t rel8 = instr_fetch(eip + 1, 1);
-	if (cpu.EFLAGS & (ZFLAG + CFLAG)) cpu.eip += rel8;
+	if (ZFLAG || CFLAG) cpu.eip += rel8;
 	return 2;
 }
 
 make_helper(jne) {
 	uint32_t rel8 = instr_fetch(eip + 1, 1);
-	if (!(cpu.EFLAGS & ZFLAG)) cpu.eip += rel8;
+	if (!ZFLAG) cpu.eip += rel8;
 	return 2;	
+}
+
+make_helper(jle) {
+	uint32_t rel8 = instr_fetch(eip + 1, 1);
+	if (ZFLAG || SFLAG != OFLAG) cpu.eip += rel8;
+	return 2;
 }

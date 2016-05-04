@@ -52,14 +52,14 @@ extern const char* regsb[];
 
 int get_reg(const char *name);
 
-#define CFLAG (1 << 0)
-#define PFLAG (1 << 2)
-#define AFLAG (1 << 4)
-#define ZFLAG (1 << 6)
-#define SFLAG (1 << 7)
-#define TFLAG (1 << 8)
-#define IFLAG (1 << 9)
-#define DFLAG (1 << 10)
-#define OFLAG (1 << 11)
+#define CFLAG (cpu.EFLAGS >> 0 & 1)
+#define PFLAG (cpu.EFLAGS >> 2 & 1)
+#define AFLAG (cpu.EFLAGS >> 4 & 1)
+#define ZFLAG (cpu.EFLAGS >> 6 & 1)
+#define SFLAG (cpu.EFLAGS >> 7 & 1)
+#define TFLAG (cpu.EFLAGS >> 8 & 1)
+#define IFLAG (cpu.EFLAGS >> 9 & 1)
+#define DFLAG (cpu.EFLAGS >> 10 & 1)
+#define OFLAG (cpu.EFLAGS >> 11 & 1)
 
 #endif
