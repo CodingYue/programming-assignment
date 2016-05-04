@@ -2,22 +2,31 @@
 
 make_helper(call) {
 	uint32_t rel;
-	if (ops_decoded.is_data_size_16) {
-		rel = instr_fetch(eip + 1, 2);
-		cpu.eip += 3;
-	} else {
-		rel = instr_fetch(eip + 1, 4);
-		cpu.eip += 5;
-	}
-
+	int len = ops_decoded.is_data_size_16 ? 2 : 4;
+	rel = instr_fetch(eip + 1, len);
+	
 	cpu.esp = cpu.esp - 0x4;
 	swaddr_write(cpu.esp, 4, cpu.eip);
 	cpu.eip += rel;
-	return 0;
+	return len+1;
 }
 
 make_helper(je) {
 	uint32_t rel8 = instr_fetch(eip + 1, 1);
 	if (cpu.EFLAGS & ZFLAG) cpu.eip += rel8;
 	return 2;
+}
+
+make_helper(jmp_b) {
+	uint32_t rel8 = instr_fetch(eip + 1, 1);
+	cpu.eip += rel8;
+	return 2;
+}
+
+make_helper(jmp_v) {
+	uint32_t rel;
+	int len = ops_decoded.is_data_size_16 ? 2 : 4;
+	rel = instr_fetch(eip + 1, len);
+	cpu.eip += rel;
+	return len+1;
 }
