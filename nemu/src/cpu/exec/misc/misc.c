@@ -37,8 +37,12 @@ make_helper(leave) {
 make_helper(ret) {
 	cpu.eip = swaddr_read(cpu.esp, 4);
 	cpu.esp += 4;
-
 	print_asm("ret");
 
 	return 0;
+}
+
+make_helper(cltd) {
+	cpu.edx = (cpu.eax >> 31 & 1) ? 0xFFFFFFFF : 0;
+	return 1;
 }
