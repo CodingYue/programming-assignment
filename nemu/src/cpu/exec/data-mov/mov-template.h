@@ -12,6 +12,13 @@ make_instr_helper(i2rm)
 make_instr_helper(r2rm)
 make_instr_helper(rm2r)
 
+make_helper(concat(movs_, SUFFIX)) {
+	MEM_W(REG(R_EDI), MEM_R(R_ESI));
+	REG(R_EDI) += DATA_BYTE;
+	REG(R_ESI) += DATA_BYTE;
+	return 0;
+}
+
 make_helper(concat(mov_a2moffs_, SUFFIX)) {
 	swaddr_t addr = instr_fetch(eip + 1, 4);
 	MEM_W(addr, REG(R_EAX));
