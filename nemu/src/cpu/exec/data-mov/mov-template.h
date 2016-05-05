@@ -16,6 +16,9 @@ make_helper(concat(movs_, SUFFIX)) {
 	MEM_W(REG(R_EDI), MEM_R(R_ESI));
 	REG(R_EDI) += DATA_BYTE;
 	REG(R_ESI) += DATA_BYTE;
+
+	print_asm("movs" str(SUFFIX) " %%%s, %%%s", REG_NAME(R_ESI), REG_NAME(R_EDI));
+
 	return 0;
 }
 
