@@ -11,6 +11,7 @@ make_instr_helper(i2r)
 make_instr_helper(i2rm)
 make_instr_helper(r2rm)
 make_instr_helper(rm2r)
+make_instr_helper(sr2rm)
 
 make_helper(concat(movs_, SUFFIX)) {
 	MEM_W(reg_l(R_EDI), reg_l(R_ESI));

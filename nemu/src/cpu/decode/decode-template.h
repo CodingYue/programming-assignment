@@ -163,13 +163,14 @@ make_helper(concat(decode_si_rm2r_, SUFFIX)) {
 	return len;
 }
 
+
+#endif
+
 make_helper(concat(decode_sr2rm_, SUFFIX)) {
 	int len = decode_rm_internal(eip, op_src2, op_dest);
 	len += decode_sr_b(eip + len);
 	return len;
 }
-
-#endif
 
 /* used by shift instructions */
 make_helper(concat(decode_rm_1_, SUFFIX)) {
