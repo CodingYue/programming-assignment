@@ -42,6 +42,12 @@ make_helper(ret) {
 	return 0;
 }
 
+make_helper(ret_w) {
+	int16_t rel16 = instr_fetch(cpu.esp, 2);
+	cpu.esp += rel16;
+	return 3;
+}
+
 make_helper(cltd) {
 	cpu.edx = (cpu.eax >> 31 & 1) ? 0xFFFFFFFF : 0;
 	return 1;
