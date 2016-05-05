@@ -47,7 +47,7 @@ make_helper(ret_w) {
 	cpu.esp += 0x4;
 	int16_t rel16 = instr_fetch(cpu.eip + 1, 2);
 	cpu.esp += rel16;
-	return 3;
+	return 0;
 }
 
 make_helper(cltd) {
