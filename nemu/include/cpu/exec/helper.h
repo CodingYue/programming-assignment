@@ -19,7 +19,7 @@
 extern char assembly[];
 
 #ifdef DEBUG
-#define print_asm(...) 
+#define print_asm(...) Assert(snprintf(assembly, 80, __VA_ARGS__) < 80, "buffer overflow!")
 #else
 #define print_asm(...)
 #endif
