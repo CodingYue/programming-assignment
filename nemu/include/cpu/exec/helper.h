@@ -17,13 +17,13 @@
 	}
 
 extern char assembly[];
-#undef DEBUG
+
 #ifdef DEBUG
-#define print_asm(...) Assert(snprintf(assembly, 80, __VA_ARGS__) < 80, "buffer overflow!")
+#define print_asm(...) 
 #else
 #define print_asm(...)
 #endif
-#define DEBUG
+
 #define print_asm_template1() \
 	print_asm(str(instr) str(SUFFIX) " %s", op_src->str)
 
