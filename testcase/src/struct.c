@@ -1,6 +1,6 @@
 #include "trap.h"
 
-#define N 100
+#define N 2
 
 struct dummy {
 	int pad1[N];
@@ -18,7 +18,7 @@ int main() {
 		d.pad2[i] = i;
 	}
 
-	struct dummy t = fun(d);
+	struct dummy t = d;
 
 	for(i = 0; i < N; i ++) {
 		nemu_assert(t.pad1[i] == i + 128);
