@@ -43,6 +43,20 @@ make_helper(concat(decode_si_, SUFFIX)) {
 }
 #endif
 
+/* sign register */
+make_helper(concat(decode_sr_, SUFFIX)) {
+	op_src->type = OP_TYPE_REG;
+	op_src->size = DATA_BYTE;
+	op_src->reg = (DATA_TYPE_S) instr_fetch(eip, DATA_BYTE);
+	op_src->val = op_src->reg;
+
+#ifdef DEBUG
+	snprintf(op_src->str, OP_STR_SIZE, "$0x%x", op_src->val);
+#endif
+
+	return DATA_BYTE;
+}
+
 /* eAX */
 static int concat(decode_a_, SUFFIX) (swaddr_t eip, Operand *op) {
 	op->type = OP_TYPE_REG;
@@ -148,6 +162,13 @@ make_helper(concat(decode_si_rm2r_, SUFFIX)) {
 	len += decode_si_b(eip + len);
 	return len;
 }
+
+make_helper(concat(decode_sr2rm_, SUFFIX)) {
+	int len = decode_rm_internal(eip, op_src2, op_dest);
+	len += decode_sr_b(eip + len);
+	return len;
+}
+
 #endif
 
 /* used by shift instructions */
