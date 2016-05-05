@@ -26,15 +26,6 @@ make_helper(rep) {
 				);
 
 			/* TODO: Jump out of the while loop if necessary. */
-			if (ops_decoded.opcode == 0xa4 || ops_decoded.opcode == 0xa5) {
-				int DATA_BYTE = 0;
-				if (ops_decoded.opcode == 0xa4) {
-					DATA_BYTE = 1;
-				} else {
-					DATA_BYTE = (ops_decoded.is_data_size_16 ? 2 : 4);
-				}
-				swaddr_write(cpu.edi+count*DATA_BYTE, DATA_BYTE, swaddr_read(cpu.esi+count*DATA_BYTE, DATA_BYTE));
-			}
 		}
 		len = 1;
 	}
