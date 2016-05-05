@@ -3,9 +3,8 @@
 #define instr pop
 
 static void do_execute() {
-	cpu.esp -= 4;
 	swaddr_write(cpu.esp, 4, op_src->val);
-
+	cpu.esp += 0x4;
 	print_asm_template1();
 }
 
