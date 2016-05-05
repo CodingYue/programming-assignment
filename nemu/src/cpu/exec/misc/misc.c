@@ -43,7 +43,7 @@ make_helper(ret) {
 }
 
 make_helper(ret_w) {
-	int16_t rel16 = instr_fetch(cpu.esp, 2);
+	int16_t rel16 = instr_fetch(cpu.eip, 2);
 	cpu.esp += rel16;
 	return 3;
 }
