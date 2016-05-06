@@ -17,7 +17,15 @@
 make_helper(movsxd_l) {
 
 	int len = decode_rm2r_w(eip);
-	reg_l(op_dest->reg) = op_src->val;
+	reg_l(op_dest->reg) = (int16_t)op_src->val;
+
+	return len;
+}
+
+make_helper(movzxd_l) {
+
+	int len = decode_rm2r_w(eip);
+	reg_l(op_dest->reg) = (uint16_t) op_src->val;
 
 	return len;
 }
@@ -30,3 +38,4 @@ make_helper_v(mov_a2moffs)
 make_helper_v(mov_moffs2a)
 make_helper_v(movs)
 make_helper_v(movsx)
+make_helper_v(movzx)

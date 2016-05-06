@@ -43,7 +43,17 @@ make_helper(concat(mov_moffs2a_, SUFFIX)) {
 make_helper(concat(movsx_, SUFFIX)) {
 	int len = decode_rm2r_b(eip);
 
-	OPERAND_W(op_dest, op_src->val);
+	OPERAND_W(op_dest, (int8_t) op_src->val);
+
+	print_asm_template2();
+
+	return len;
+}
+
+make_helper(concat(movzx_, SUFFIX)) {
+	int len = decode_rm2r_b(eip);
+
+	OPERAND_W(op_dest, (uint8_t) op_src->val);
 
 	print_asm_template2();
 
