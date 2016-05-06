@@ -55,3 +55,11 @@ void reg_test() {
 	assert(eip_sample == cpu.eip);
 }
 
+void update_EFLAGS(uint64_t result) {
+	cpu.EFLAGS = 0x2;
+	cpu.EFLAGS |= (result >> 32 & 1) << 0; // carry flag.
+	cpu.EFLAGS |= (result & 1) << 2;
+	cpu.EFLAGS |= (!result) << 6;
+	cpu.EFLAGS |= (result >> 31 & 1) << 7;
+	cpu.EFLAGS |= (result >> 32 & 1) << 11;
+}
