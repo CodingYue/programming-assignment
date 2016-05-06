@@ -48,7 +48,7 @@ make_helper(ret_w) {
 	int16_t rel16 = instr_fetch(cpu.eip + 1, 2);
 	cpu.esp += rel16;
 
-	print_asm("ret %04x", rel16);
+	print_asm("ret %d", rel16);
 
 	return 0;
 }
