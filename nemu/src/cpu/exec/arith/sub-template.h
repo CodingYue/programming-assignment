@@ -4,8 +4,8 @@
 
 static void do_execute() {
 	DATA_TYPE dest = op_dest->val;
-	DATA_TYPE src = ~op_src->val + 1;
-	uint64_t result = (uint64_t) src + dest;
+	DATA_TYPE src = op_src->val;
+	uint64_t result = (uint64_t) dest - src;
 	
 	OPERAND_W(op_dest, (DATA_TYPE) result);
 

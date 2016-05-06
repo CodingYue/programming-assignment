@@ -5,9 +5,9 @@
 static void do_execute() {
 
 	DATA_TYPE dest = op_dest->val;
-	DATA_TYPE src = (~op_src->val) + 1;
+	DATA_TYPE src = op_src->val;
 
-	uint64_t result = (uint64_t) src + dest;
+	uint64_t result = (uint64_t) dest - src;
 	update_EFLAGS(result, DATA_BYTE);
 	print_asm_template2();
 
@@ -20,4 +20,4 @@ make_instr_helper(si2rm)
 make_instr_helper(r2rm)
 make_instr_helper(rm2r)
 
-#include "cpu/exec/template-end.h"
+#include "cpu/exec/template-end.h"	
