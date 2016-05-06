@@ -58,7 +58,7 @@ void reg_test() {
 void update_EFLAGS(uint64_t result, int DATA_BYTE) {
 	cpu.EFLAGS = 0x2;
 
-	int len = (4 * DATA_BYTE);
+	int len = (8 * DATA_BYTE);
 	cpu.EFLAGS |= (result >> len & 1) << 0;
 	cpu.EFLAGS |= (result & 1) << 2;
 	cpu.EFLAGS |= (!result) << 6;
