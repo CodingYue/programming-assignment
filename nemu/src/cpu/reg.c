@@ -63,5 +63,5 @@ void update_EFLAGS(uint64_t result, int DATA_BYTE) {
 	cpu.EFLAGS |= (result & 1) << 2;
 	cpu.EFLAGS |= (!result) << 6;
 	cpu.EFLAGS |= (result >> (len-1) & 1) << 7;
-	cpu.EFLAGS |= (!(result >> len)) << 11;
+	cpu.EFLAGS |= ((result >> len) != 0) << 11;
 }
