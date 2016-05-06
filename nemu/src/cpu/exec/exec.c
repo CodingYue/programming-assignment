@@ -87,7 +87,7 @@ make_group(group6,
 
 make_group(group7,
 	inv, inv, inv, inv, 
-	inv, inv, inv, inv)
+	jmp_rm_v, inv, inv, inv)
 
 
 /* TODO: Add more instructions!!! */
