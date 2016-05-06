@@ -45,7 +45,6 @@ make_helper(ret) {
 make_helper(ret_w) {
 	cpu.eip = swaddr_read(cpu.esp, 4);
 	cpu.esp += 0x4;
-	printf("0x%x %u\n", eip, instr_fetch(eip+1, 2));
 	int16_t rel16 = (int16_t) instr_fetch(eip + 1, 2);
 	cpu.esp += rel16;
 
