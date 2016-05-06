@@ -13,9 +13,9 @@ make_instr_helper(r2rm)
 make_instr_helper(rm2r)
 
 make_helper(concat(movs_, SUFFIX)) {
-	MEM_W(reg_l(R_EDI), reg_l(R_ESI));
-	reg_l(R_EDI) += DATA_BYTE;
-	reg_l(R_ESI) += DATA_BYTE;
+	MEM_W(REG(R_EDI), MEM_R(REG(R_ESI)));
+	REG(R_EDI) += DATA_BYTE;
+	REG(R_ESI) += DATA_BYTE;
 
 	print_asm("movs" str(SUFFIX) " %%%s, %%%s", REG_NAME(R_ESI), REG_NAME(R_EDI));
 
