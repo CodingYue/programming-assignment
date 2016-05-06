@@ -11,7 +11,6 @@ make_instr_helper(i2r)
 make_instr_helper(i2rm)
 make_instr_helper(r2rm)
 make_instr_helper(rm2r)
-make_instr_helper(sr2rm)
 
 make_helper(concat(movs_, SUFFIX)) {
 	MEM_W(reg_l(R_EDI), reg_l(R_ESI));
@@ -39,4 +38,17 @@ make_helper(concat(mov_moffs2a_, SUFFIX)) {
 	return 5;
 }
 
+#if DATA_BYTE == 2 || DATA_BYTE == 4
+
+make_helper(concat(movsx_, SUFFIX)) {
+	int len = decode_rm2r_b(eip);
+
+	OPERAND_W(op_dest, op_src->val);
+
+	print_asm_template2();
+
+	return len;
+}
+
+#endif
 #include "cpu/exec/template-end.h"
