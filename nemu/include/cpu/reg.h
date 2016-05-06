@@ -62,6 +62,6 @@ int get_reg(const char *name);
 #define DFLAG (cpu.EFLAGS >> 10 & 1)
 #define OFLAG (cpu.EFLAGS >> 11 & 1)
 
-void update_EFLAGS(uint64_t);
+void update_EFLAGS(uint64_t, int);
 
 #endif

@@ -4,8 +4,11 @@
 
 static void do_execute() {
 
-	uint64_t result = op_dest->val - op_src->val;
-	update_EFLAGS(result);
+	DATA_TYPE dest = op_dest->val;
+	DATA_TYPE src = (~op_src->val) + 1;
+
+	uint64_t result = (uint64_t) src + dest;
+	update_EFLAGS(result, DATA_BYTE);
 	print_asm_template2();
 
 }

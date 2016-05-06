@@ -4,7 +4,7 @@
 
 static void do_execute() {
 
-	update_EFLAGS(op_dest->val);
+	update_EFLAGS(op_dest->val, DATA_BYTE);
 	print_asm_template1();
 
 }

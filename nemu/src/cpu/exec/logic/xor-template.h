@@ -6,7 +6,7 @@ static void do_execute () {
 	DATA_TYPE result = op_dest->val ^ op_src->val;
 	OPERAND_W(op_dest, result);
 
-	update_EFLAGS(result);
+	update_EFLAGS(result, DATA_BYTE);
 
 	print_asm_template2();
 }
