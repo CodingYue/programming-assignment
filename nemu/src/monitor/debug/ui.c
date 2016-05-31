@@ -41,6 +41,7 @@ static int cmd_x(char *args);
 static int cmd_p(char *args);
 static int cmd_w(char *args);
 static int cmd_d(char *args);
+static int cmd_bt();
 
 static struct {
 	char *name;
@@ -55,8 +56,8 @@ static struct {
 	{ "x", "x N EXPR - Print 4N bytes from EXPR", cmd_x},
 	{ "p", "p EXPR - Evaluate value of EXPR", cmd_p},
 	{ "w", "w EXPR - Program pause while EXPR changes", cmd_w},
-	{ "d", "d N - Delete No.N watchpoint", cmd_d}
-
+	{ "d", "d N - Delete No.N watchpoint", cmd_d},
+	{ "bt", "bt - Print Stack Frames", cmd_bt}
 	/* TODO: Add more commands */
 
 };
@@ -165,6 +166,15 @@ static int cmd_help(char *args) {
 			}
 		}
 		printf("Unknown command '%s'\n", arg);
+	}
+	return 0;
+}
+
+static int cmd_bt() {
+	swaddr_t ebp = cpu.ebp;
+	while (ebp) {
+		func_name(ebp+4);
+		ebp = swaddr_read(ebp, 4);
 	}
 	return 0;
 }
