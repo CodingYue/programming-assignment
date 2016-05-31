@@ -100,6 +100,7 @@ int variable_value(const char *var_name, bool *success) {
 char *func_name(swaddr_t addr) {
 	printf("%x\n", (int) addr);
 	int i;
+	printf("%d\n", nr_symtab_entry);
 	for (i = 0; i < nr_symtab_entry; ++i) {
 		printf("%x ", symtab[i].st_value);
 		if (symtab[i].st_info != STT_FUNC) continue;
