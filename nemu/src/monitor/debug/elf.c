@@ -101,9 +101,10 @@ char *func_name(swaddr_t addr) {
 	printf("%x\n", (int) addr);
 	int i;
 	for (i = 0; i < nr_symtab_entry; ++i) {
+		printf("%x ", symtab[i].st_value);
 		if (symtab[i].st_info != STT_FUNC) continue;
 		int idx = symtab[i].st_name;
-		printf("%x ", symtab[i].st_value);
+		//printf("%x ", symtab[i].st_value);
 		if (symtab[i].st_value == addr) {
 			return strtab + idx;
 		}
