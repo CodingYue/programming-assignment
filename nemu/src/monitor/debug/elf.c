@@ -104,7 +104,7 @@ char *func_name(swaddr_t addr) {
 	for (i = 0; i < nr_symtab_entry; ++i) {
 		
 		printf("%x ", (uint32_t) symtab[i].st_info);
-		if (symtab[i].st_info != 12) continue;
+		//if (symtab[i].st_info != 12) continue;
 		int idx = symtab[i].st_name;
 		//printf("%x ", symtab[i].st_value);
 		if (symtab[i].st_value == addr) {
