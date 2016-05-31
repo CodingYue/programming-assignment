@@ -6,4 +6,5 @@
 #include "cpu/reg.h"
 
 int variable_value(const char *, bool *);
+char *func_name(swaddr_t);
 #endif
