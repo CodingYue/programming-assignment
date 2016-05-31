@@ -112,6 +112,6 @@ char *func_name(swaddr_t addr) {
 		}
 	}
 
-	printf("\n");
+	printf("NONONO\n");
 	return NULL;
 }
