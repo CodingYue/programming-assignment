@@ -177,7 +177,7 @@ static int cmd_bt() {
 	//	printf("%x\n", (int) ebp);
 		swaddr_t addr = swaddr_read(ebp+4, 4);
 		char *name = func_name(addr);
-		printf("addr = 0x%x %s()\n", addr, name);
+		printf("addr = 0x%x, %s()\n", addr, name);
 		ebp = swaddr_read(ebp, 4);
 	}
 	return 0;
