@@ -102,7 +102,7 @@ char *func_name(swaddr_t addr) {
 	int i;
 	printf("%d\n", nr_symtab_entry);
 	for (i = 0; i < nr_symtab_entry; ++i) {
-		printf("%x ", symtab[i].st_value);
+		printf("%x ", (int) symtab[i].st_value);
 		if (symtab[i].st_info != STT_FUNC) continue;
 		int idx = symtab[i].st_name;
 		//printf("%x ", symtab[i].st_value);
