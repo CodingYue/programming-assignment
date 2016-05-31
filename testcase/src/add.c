@@ -11,13 +11,14 @@ int ans[] = {0, 0x1, 0x2, 0x7fffffff, 0x80000000, 0x80000001, 0xfffffffe, 0xffff
 #define NR_DATA (sizeof(test_data) / sizeof(test_data[0]))
 
 int main() {
+	
+	set_bp();
 	int i, j, ans_idx = 0;
 	for(i = 0; i < NR_DATA; i ++) {
 		for(j = 0; j < NR_DATA; j ++) {
 			nemu_assert(add(test_data[i], test_data[j]) == ans[ans_idx ++]);
 		}
 	}
-	set_bp();
 	nemu_assert(i == NR_DATA);
 	nemu_assert(j == NR_DATA);
 
