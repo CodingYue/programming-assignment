@@ -110,5 +110,6 @@ char *func_name(swaddr_t addr) {
 			return strtab + idx;
 		}
 	}
+	printf("\n");
 	return NULL;
 }
