@@ -100,7 +100,7 @@ int variable_value(const char *var_name, bool *success) {
 char *func_name(swaddr_t addr) {
 	int i;
 
-	printf("%x\n", addr);
+	//printf("%x\n", addr);
 
 	for (i = 0; i < nr_symtab_entry; ++i) {
 		if (symtab[i].st_info != 18) continue;
@@ -109,6 +109,6 @@ char *func_name(swaddr_t addr) {
 			return strtab + idx;
 		}
 	}
-	printf("NONONO\n");
+	//printf("NONONO\n");
 	return NULL;
 }
