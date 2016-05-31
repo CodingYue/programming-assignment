@@ -172,6 +172,7 @@ static int cmd_help(char *args) {
 
 static int cmd_bt() {
 	swaddr_t ebp = cpu.ebp;
+	printf("%x\n", (int) ebp);
 	while (ebp) {
 		func_name(ebp+4);
 		ebp = swaddr_read(ebp, 4);
