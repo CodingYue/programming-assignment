@@ -174,9 +174,10 @@ static int cmd_bt() {
 	swaddr_t ebp = cpu.ebp;
 	while (ebp) {
 
-		printf("%x\n", (int) ebp);
-		char *name = func_name(swaddr_read(ebp+4, 4));
-		printf("%s\n", name);
+	//	printf("%x\n", (int) ebp);
+		swaddr_t addr = swaddr_read(ebp+4, 4);
+		char *name = func_name(addr);
+		printf("addr = 0x%x %s()\n", addr, name);
 		ebp = swaddr_read(ebp, 4);
 	}
 	return 0;
