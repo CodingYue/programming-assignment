@@ -33,7 +33,7 @@ static struct rule {
 	{"\\(", L_brackets},
 	{"\\)", R_brackets},
 	{"==", EQUAL},						// equal
-	{"[a-z]+", VARIABLE}
+	{"[a-z|\\_]+", VARIABLE}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
