@@ -5,4 +5,5 @@
 #include "memory/memory.h"
 #include "cpu/reg.h"
 
+int variable_value(const char *, bool *);
 #endif

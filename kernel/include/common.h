@@ -23,7 +23,6 @@ typedef uint8_t bool;
 #define NULL ((void *)0)
 
 #include "debug.h"
-
 #endif
 
 #endif

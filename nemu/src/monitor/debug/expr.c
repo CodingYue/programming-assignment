@@ -9,9 +9,7 @@
 
 enum {
 	NOTYPE, MULTIPLE, DIVISION, EQUAL, PLUS, MINUS,
-	DECIMAL, HEX, REG, L_brackets, R_brackets
-
-	/* TODO: Add more token types */
+	DECIMAL, HEX, REG, L_brackets, R_brackets, VARIABLE
 
 };
 
@@ -34,7 +32,8 @@ static struct rule {
 	{"\\$[a-z]+", REG},
 	{"\\(", L_brackets},
 	{"\\)", R_brackets},
-	{"==", EQUAL}						// equal
+	{"==", EQUAL},						// equal
+	{"[a-z]+", VARIABLE}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -127,6 +126,15 @@ int expr(char *e, bool *success) {
 		
 		struct expr cur;
 
+		if (tokens[i].type == VARIABLE) {
+			cur.type = 0;
+			bool tmp_success = false;
+			cur.value = (int) variable_value(tokens[i].str, &tmp_success);
+			if (!tmp_success) {
+				success = false;
+				return 0;
+			}
+		} else
 		if (tokens[i].type == HEX) {
 			cur.type = 0;
 			cur.value = (int) strtol(tokens[i].str, NULL, 16);
