@@ -175,7 +175,8 @@ static int cmd_bt() {
 	while (ebp) {
 
 		printf("%x\n", (int) ebp);
-		printf("%s\n", func_name(swaddr_read(ebp+4, 4)));
+		char *name = func_name(swaddr_read(ebp+4, 4));
+		printf("%s\n", name);
 		ebp = swaddr_read(ebp, 4);
 	}
 	return 0;
