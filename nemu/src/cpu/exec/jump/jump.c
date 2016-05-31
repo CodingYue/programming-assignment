@@ -75,7 +75,7 @@ make_helper(call) {
 	cpu.eip += rel;
 
 
-	swaddr_write(cpu.esp, 4, cpu.eip);
+	swaddr_write(cpu.esp, 4, cpu.eip+len+1);
 
 	print_asm("call 0x%x", cpu.eip+len+1);
 
