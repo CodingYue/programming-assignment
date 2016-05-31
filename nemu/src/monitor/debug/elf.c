@@ -86,6 +86,7 @@ void load_elf_tables(int argc, char *argv[]) {
 int variable_value(const char *var_name, bool *success) {
 	int i;
 	for (i = 0; i < nr_symtab_entry; ++i) {
+		if (symtab[i].st_info != STT_OBJECT) continue;
 		int idx = symtab[i].st_name;
 		if (strcmp(var_name, strtab + idx) == 0) {
 			*success = true;
@@ -94,4 +95,16 @@ int variable_value(const char *var_name, bool *success) {
 	}
 	*success = false;
 	return 0;
+}
+
+char *func_name(swaddr_t addr) {
+	int i;
+	for (i = 0; i < nr_symtab_entry; ++i) {
+		if (symtab[i].st_info != STT_FUNC) continue;
+		int idx = symtab[i].st_name;
+		if (symtab[i].st_value == addr) {
+			return strtab + idx;
+		}
+	}
+	return NULL;
 }
