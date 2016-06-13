@@ -14,6 +14,8 @@ make_helper(jge_b);
 make_helper(jl_b);
 make_helper(ja_b);
 make_helper(jmp_rm_b);
+make_helper(jb_b);
+
 
 make_helper(jmp_v);
 make_helper(je_v);
@@ -26,5 +28,6 @@ make_helper(jge_v);
 make_helper(jl_v);
 make_helper(ja_v);
 make_helper(jmp_rm_v);
+make_helper(jb_v);
 
 #endif

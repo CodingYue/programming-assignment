@@ -20,7 +20,7 @@
 	jcc_helper(l, "l", (SFLAG != OFLAG)) \
 	jcc_helper(le, "le", (ZFLAG == 1 || SFLAG != OFLAG)) \
 	jcc_helper(g, "g", (ZFLAG == 0 && SFLAG == OFLAG)) \
-	jcc_helper(ge, "ge", (SFLAG == OFLAG))
+	jcc_helper(ge, "ge", (SFLAG == OFLAG)) \
 
 #define DATA_BYTE 1
 
