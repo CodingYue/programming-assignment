@@ -14,8 +14,9 @@ void *sbrk(int incr) {
 }
 
 int main() {
-	sprintf(buf, "%s", "Hello world!\n");
+	
 	set_bp();
+	sprintf(buf, "%s", "Hello world!\n");
 	nemu_assert(strcmp(buf, "Hello world!\n") == 0);
 
 	sprintf(buf, "%d + %d = %d\n", 1, 1, 2);
